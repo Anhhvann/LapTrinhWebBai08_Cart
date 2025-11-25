@@ -1,6 +1,7 @@
 package murach.business;
 
 import java.io.Serializable;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
 public class Cart implements Serializable {
@@ -41,5 +42,18 @@ public class Cart implements Serializable {
                 return;
             }
         }
+    }
+
+    public double getTotal() {
+        double total = 0;
+        for (LineItem item : items) {
+            total += item.getTotal();
+        }
+        return total;
+    }
+
+    public String getTotalCurrencyFormat() {
+        NumberFormat currency = NumberFormat.getCurrencyInstance();
+        return currency.format(this.getTotal());
     }
 }
